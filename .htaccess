@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule ^test$ global.php [L]
