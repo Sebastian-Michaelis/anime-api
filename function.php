@@ -33,7 +33,7 @@ function updateQuote()
     global $conn;
     $res = getRandomQuote();
     $newDate = date('Y-m-d');
-    echo $newDate;
+    // echo $newDate;
     $query = "UPDATE  settings SET currentDate='{$newDate}',quoteId={$res['id']}";
     mysqli_query($conn, $query);
     return $res['id'];
