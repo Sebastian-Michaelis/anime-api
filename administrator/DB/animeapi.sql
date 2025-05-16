@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 15, 2025 at 02:13 PM
+-- Generation Time: May 16, 2025 at 02:53 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
 --
 
 INSERT INTO `settings` (`id`, `currentDate`, `quoteId`) VALUES
-(1, '2025-05-15', 73);
+(1, '2025-05-16', 19);
 
 -- --------------------------------------------------------
 
@@ -162,6 +162,13 @@ CREATE TABLE IF NOT EXISTS `users` (
   `userName` varchar(100) DEFAULT NULL,
   `passcode` varchar(100) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`userName`, `passcode`) VALUES
+('admin', ')861M:6XT,S(Q ` ');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

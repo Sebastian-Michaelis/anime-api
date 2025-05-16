@@ -25,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $_SESSION['admin'] = true;
             header("location: index.php");
         } else {
-            // echo 'hello';
             $err['invalid'] = 'Invalid Username or Password';
         }
     }
@@ -51,7 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <body>
 
     <div class="main">
-
         <!-- Sing in  Form -->
         <section class="sign-in my-5">
             <div class="container">
