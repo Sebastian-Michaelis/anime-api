@@ -627,3 +627,6 @@ label.valid:after {
     }
 }
 
+.form-group:has(.alert) label {
+    top: 24% !important;
+}

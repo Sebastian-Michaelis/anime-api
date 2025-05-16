@@ -45,4 +45,36 @@ function getRandomQuote()
     $query = 'SELECT * FROM anime ORDER BY RAND() LIMIT 1';
     return mysqli_fetch_assoc(mysqli_query($conn, $query));
 }
+
+function validateFields($data, $rules)
+{
+    $errors = [];
+    foreach ($rules as $field => $fieldRules) {
+        $value = trim(isset($data[$field]) ? $data[$field] : '');
+        if ($fieldRules['required'] && empty($value))
+            $errors[$field] = ucfirst($field) . ' is Required';
+        else {
+            if (isset($field['email']) && !filter_var($value, FILTER_VALIDATE_EMAIL))
+                $errors[$field] = ucfirst($field) . ' not a valid Format';
+            if (isset($fieldRules['numeric']) && !is_numeric($value))
+                $errors[$field] = ucfirst($field) . ' must be a number';
+            if (isset($fieldRules['minlength']) && strlen($value) < $fieldRules['minlength'])
+                $errors[$field] = ucfirst($field) . ' must have at least ' . $fieldRules['minlength'] . ' characters';
+            if (isset($fieldRules['maxlength']) && strlen($value) > $fieldRules['maxlength'])
+                $errors[$field] = ucfirst($field) . ' can have at maximum ' . $fieldRules['maxlength'] . ' characters';
+        }
+    }
+    return $errors;
+}
+
+function verifyUser($username, $pass)
+{
+    global $conn;
+    $query = "SELECT * FROM users";
+    $res = mysqli_fetch_assoc(mysqli_query($conn, $query));
+    if ($res['userName'] == $username && convert_uudecode($res["passcode"]) == $pass)
+        return true;
+    return false;
+}
+
 ?>
