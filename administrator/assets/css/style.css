@@ -694,10 +694,6 @@ label.valid:after {
   top: 24% !important;
 }
 
-body {
-  background: linear-gradient(135deg, #e0eafc, #cfdef3);
-  font-family: "Segoe UI", sans-serif;
-}
 
 .container {
   margin-top: 50px;

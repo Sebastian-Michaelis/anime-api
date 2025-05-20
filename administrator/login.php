@@ -4,6 +4,10 @@
 
 require_once(__DIR__ . "/../function.php");
 require_once(__DIR__ . "/../global.php");
+require_once(__DIR__."/credentials.php");
+
+if($logedIn)
+header("location: index.php");
 
 $rules = [
     "username" => [
