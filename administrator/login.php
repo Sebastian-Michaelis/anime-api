@@ -1,5 +1,5 @@
 <?php
-echo convert_uudecode(")861M:6XT,S(Q `");;
+// echo convert_uudecode(")861M:6XT,S(Q `");;
 // session_start();
 
 require_once(__DIR__ . "/../function.php");
@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // print_r($err);
     if (empty($err)) {
         if (verifyUser($_POST["username"], $_POST["password"])) {
+            session_start();
             $_SESSION['admin'] = true;
             header("location: index.php");
         } else {

@@ -77,4 +77,13 @@ function verifyUser($username, $pass)
     return false;
 }
 
+
+function getRecordCount()
+{
+    global $conn;
+    $res=mysqli_query($conn,"SELECT COUNT(1) as count FROM anime");
+    return mysqli_fetch_assoc($res)['count'];
+}
+
+
 ?>
