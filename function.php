@@ -81,10 +81,15 @@ function verifyUser($username, $pass)
 function getRecordCount()
 {
     global $conn;
-    $res=mysqli_query($conn,"SELECT COUNT(1) as count FROM anime");
+    $res = mysqli_query($conn, "SELECT COUNT(1) as count FROM anime");
     return mysqli_fetch_assoc($res)['count'];
 }
 
-
-
+function deleteRecord($id)
+{
+    global $conn;
+    if (mysqli_query($conn, "DELETE FROM anime WHERE id={$id}"))
+        return true;
+    return false;
+}
 ?>
