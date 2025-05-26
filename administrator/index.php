@@ -104,7 +104,7 @@ $total = ceil(getRecordCount() / $limit);
             </table>
 
             <nav>
-                <ul class="pagination">
+                <ul class="pagination" data-total="<?=$total?>">
                     <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
                     <?php
                     for ($x = 1; $x <= $total; $x++) {
