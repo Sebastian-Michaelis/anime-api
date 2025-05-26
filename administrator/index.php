@@ -8,6 +8,12 @@ if (!$logedIn)
 $limit = 4;
 $total = ceil(getRecordCount() / $limit);
 
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    session_unset();
+    session_destroy();
+    header("Location: login.php");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -29,9 +35,11 @@ $total = ceil(getRecordCount() / $limit);
 <body>
     <div class="container">
         <div class="signout-btn">
-            <button class="btn btn-outline-danger">
-                <i class="zmdi zmdi-power"></i> Sign Out
-            </button>
+            <form method="POST">
+                <button class="btn btn-outline-danger">
+                    <i class="zmdi zmdi-power"></i> Sign Out
+                </button>
+            </form>
         </div>
 
         <div class="form-section">
@@ -104,7 +112,7 @@ $total = ceil(getRecordCount() / $limit);
             </table>
 
             <nav>
-                <ul class="pagination" data-total="<?=$total?>">
+                <ul class="pagination" data-total="<?= $total ?>">
                     <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
                     <?php
                     for ($x = 1; $x <= $total; $x++) {
