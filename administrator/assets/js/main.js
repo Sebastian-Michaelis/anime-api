@@ -4,23 +4,25 @@ document.addEventListener("DOMContentLoaded", function () {
   const totalRecordItems = 4;
 
   renderPagination(1, totalRecords); //on first load render the pagination
-  getRecords(1, totalRecordItems).then(response => {
-    const list = createItemList(JSON.parse(response));
-    document.querySelector('.table-section tbody').innerHTML=list;
-  });
+  renderRecord(1,totalRecordItems);//on first load, load the records
   //pagination event
   document.addEventListener('click', function (event) {
     if (event.target.matches('.pagination button')) {
       let page = Number(event.target.getAttribute('data-page'));
       renderPagination((page), totalRecords);
-      getRecords(page, totalRecordItems).then(response => {
-        const list = createItemList(JSON.parse(response));
-        document.querySelector('.table-section tbody').innerHTML=list;
-      });
+      renderRecord(page,totalRecordItems);
     }
   });
 
 });
+//render the record using promise
+function renderRecord(page,totalRecordItems)
+{
+  getRecords(page, totalRecordItems).then(response => {
+    const list = createItemList(JSON.parse(response));
+    document.querySelector('.table-section tbody').innerHTML=list;
+  });
+}
 //read records using pagination
 function getRecords(currentPage, RecordItems) {
 
