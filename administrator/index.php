@@ -8,10 +8,45 @@ if (!$logedIn)
 $limit = 4;
 $total = ceil(getRecordCount() / $limit);
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
+if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['logout'])) {
     session_unset();
     session_destroy();
     header("Location: login.php");
+}
+if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['submit'])) {
+    $rules = [
+        'title' => [
+            'required' => true,
+            'minlength' => 2
+        ],
+        'saidBy' => [
+            'required' => true,
+            'minlength' => 2
+        ],
+        'quote' => [
+            'required' => true,
+            'minlength' => 5
+        ]
+    ];
+    $err = validateFields($_POST, $rules);
+    if (empty($err)) {
+        $data = [
+            "title" => $_POST['title'],
+            "saidBy" => $_POST['saidBy'],
+            "quote" => $_POST['quote'],
+        ];
+        
+        $options = [
+            "http" => [
+                "header"  => "Content-Type: application/json\r\n",
+                "method"  => "POST",
+                "content" => json_encode($data)
+            ]
+        ];
+        $context = stream_context_create($options);
+        $response = file_get_contents("http://localhost:84/insert-record.php", false, $context);
+        
+    }
 }
 
 ?>
@@ -36,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <div class="container">
         <div class="signout-btn">
             <form method="POST">
-                <button class="btn btn-outline-danger">
+                <button class="btn btn-outline-danger" name="logout">
                     <i class="zmdi zmdi-power"></i> Sign Out
                 </button>
             </form>
@@ -44,23 +79,29 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         <div class="form-section">
             <h3 class="mb-4 text-center text-primary"><i class="zmdi zmdi-quote"></i> Anime Quote Manager</h3>
-            <form>
+            <form method="POST">
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="animeTitle" class="form-label"><i class="zmdi zmdi-slideshow"></i>Anime
                             Title</label>
-                        <input type="text" class="form-control" id="animeTitle" placeholder="Enter anime title">
+                        <input type="text" class="form-control" name="title" id="animeTitle" placeholder="Enter anime title">
+                        <?= isset($err['title']) ? ' <span class="alert alert-danger py-2 mt-2 d-inline-block w-100 mb-0" role="alert"><i class="zmdi zmdi-alert-circle me-2"></i>' . $err['title'] . '</span>' : '' ?>
+
                     </div>
                     <div class="col-md-6">
                         <label for="saidBy" class="form-label"><i class="zmdi zmdi-account"></i>Said By</label>
-                        <input type="text" class="form-control" id="saidBy" placeholder="Who said it?">
+                        <input type="text" class="form-control" name="saidBy" id="saidBy" placeholder="Who said it?">
+                        <?= isset($err['saidBy']) ? ' <span class="alert alert-danger py-2 mt-2 d-inline-block w-100 mb-0" role="alert"><i class="zmdi zmdi-alert-circle me-2"></i>' . $err['saidBy'] . '</span>' : '' ?>
+
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="quote" class="form-label"><i class="zmdi zmdi-comment-text"></i>Quote</label>
-                    <textarea class="form-control" id="quote" rows="3" placeholder="Enter the quote"></textarea>
+                    <textarea class="form-control" id="quote" name="quote" rows="3" placeholder="Enter the quote"></textarea>
+                    <?= isset($err['quote']) ? ' <span class="alert alert-danger py-2 mt-2 d-inline-block w-100 mb-0" role="alert"><i class="zmdi zmdi-alert-circle me-2"></i>' . $err['quote'] . '</span>' : '' ?>
                 </div>
-                <button type="submit" class="btn btn-primary w-100"><i class="zmdi zmdi-plus-circle"></i> Submit
+                <button type="submit" name="submit" class="btn btn-primary w-100"><i class="zmdi zmdi-plus-circle"></i>
+                    Submit
                     Quote</button>
             </form>
         </div>

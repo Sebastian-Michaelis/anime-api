@@ -92,4 +92,15 @@ function deleteRecord($id)
         return true;
     return false;
 }
+
+function insertRecord($data)
+{
+    global $conn;
+    $data=implode("','",$data);
+    $res=mysqli_query($conn,"INSERT INTO anime(title,saidBy,quote)  VALUES ('{$data}')");
+    if ($res)
+    return true;
+return false;
+}
+
 ?>
