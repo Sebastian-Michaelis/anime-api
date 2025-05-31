@@ -7,8 +7,8 @@ header("Access-Control-Allow-Methods: POST");
 require_once(__DIR__ . "/global.php");
 
 
-$page = isset(getallheaders()['page'])?getallheaders()['page']:1;
-$limit = isset(getallheaders()['limit'])?getallheaders()['limit']:4;
+$page = isset($_GET['page'])?$_GET['page']:1;
+$limit = isset($_GET['limit'])?$_GET['limit']:4;
 
 $offset=($page-1)*$limit;
 $res = mysqli_query($conn, "SELECT * FROM (SELECT *,DENSE_RANK() OVER(ORDER BY id DESC) AS serialNo FROM anime LIMIT {$offset},{$limit}) AS temp");

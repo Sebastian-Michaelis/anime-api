@@ -42,7 +42,7 @@ function getRecords(currentPage, RecordItems) {
       else
         reject(this.status);
     }
-    xhttp.open("POST", "http://localhost:84/pagination-record.php");
+    xhttp.open("GET", `http://localhost:84/pagination-record.php?page=${currentPage}&limit=${RecordItems}`);
     xhttp.setRequestHeader('page', currentPage);
     xhttp.setRequestHeader('limit', RecordItems);
     xhttp.send();
@@ -105,8 +105,8 @@ function deleteRecord(id) {
         reject(this.status);
     }
     xhttp.open("DELETE", "http://localhost:84/delete-record.php");
-    xhttp.setRequestHeader('data-id', id);
-    xhttp.send();
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.send(JSON.stringify({'data-id': id}));
   });
 
 }
@@ -142,3 +142,4 @@ function createToast(message) {
     toastBootstrap.hide();
   }, 4000);
 }
+
