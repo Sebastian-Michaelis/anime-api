@@ -103,4 +103,10 @@ function insertRecord($data)
 return false;
 }
 
+function updateRecord($data)
+{
+    global $conn;
+    
+}
+
 ?>

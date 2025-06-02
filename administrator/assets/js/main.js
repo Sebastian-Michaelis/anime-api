@@ -20,6 +20,15 @@ document.addEventListener("DOMContentLoaded", function () {
     if (click) {
       deleteItem(click.getAttribute('data-record'), totalRecordItems);
     }
+  });
+
+  document.addEventListener('click', function (event) {
+    let click = event.target.closest('.table-section .edit-btn');
+    if (click) {
+
+      singleRecord(click.getAttribute('data-record'));
+      
+    }
   })
 
 });
@@ -106,7 +115,7 @@ function deleteRecord(id) {
     }
     xhttp.open("DELETE", "http://localhost:84/delete-record.php");
     xhttp.setRequestHeader("Content-Type", "application/json");
-    xhttp.send(JSON.stringify({'data-id': id}));
+    xhttp.send(JSON.stringify({ 'data-id': id }));
   });
 
 }
@@ -116,7 +125,7 @@ function deleteItem(id, totalRecordItems) {
   deleteRecord(id).then(response => {
     if (response) {
       renderRecord(document.querySelector('.pagination .active').getAttribute('data-page'), totalRecordItems);//getting the current page and rendering the data
-      createToast("Record Deleted Successfully.") 
+      createToast("Record Deleted Successfully.")
     }
   });
 }
@@ -143,3 +152,31 @@ function createToast(message) {
   }, 4000);
 }
 
+function singleRecord(record) {
+  return getSingleRecord(record).then(response => {
+    if (response) 
+    {
+      let values=JSON.parse(response);
+      document.querySelector("#myModal #updateAnimeTitle").value=values['title'];
+      document.querySelector("#myModal #updateSaidBy").value=values['saidBy'];
+      document.querySelector("#myModal #updateQuote").value=values['quote'];
+      document.querySelector("#myModal #record").value=values['id'];
+      const myModal = new bootstrap.Modal(document.getElementById('myModal'));
+      myModal.show();
+    }
+  });
+}
+
+function getSingleRecord(record) {
+  return new Promise((resolve, reject) => {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function () {
+      if (this.status === 200)
+        resolve(this.responseText);
+      else
+        reject(this.status);
+    }
+    xhttp.open("GET", `http://localhost:84/data.php?quote=${record}`);
+    xhttp.send();
+  });
+}
