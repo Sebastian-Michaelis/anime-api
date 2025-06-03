@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 16, 2025 at 02:53 PM
+-- Generation Time: Jun 03, 2025 at 02:29 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `anime` (
   `saidBy` varchar(100) NOT NULL,
   `quote` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=93 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `anime`
@@ -42,11 +42,9 @@ CREATE TABLE IF NOT EXISTS `anime` (
 
 INSERT INTO `anime` (`id`, `title`, `saidBy`, `quote`) VALUES
 (1, 'Dragon Ball Z', 'Goku', 'I am the hope of the universe. I am the answer to all living things that cry out for peace.'),
-(2, 'Dragon Ball Z', 'Vegeta', 'There’s only one certainty in life. A strong man stands above and conquers all!'),
-(3, 'Dragon Ball Z', 'Goku', 'Power comes in response to a need, not a desire. You have to create that need.'),
-(4, 'Dragon Ball Z', 'Vegeta', 'You may have invaded my mind and my body, but there’s one thing a Saiyan always keeps… his pride!'),
+(2, 'DBZ', 'Beerus', 'This compelete in its all its majesty'),
 (5, 'Dragon Ball Z', 'Gohan', 'There’s no point in being angry if you can’t change anything.'),
-(6, 'Dragon Ball Z', 'Piccolo', 'Sometimes, we have to look beyond what we want and do what’s best.'),
+(92, 'Hajjime no Ippo', 'Kamgawa', 'Not everyone who has worked hard is rewarded, but those who are rewarded have worked hard.\r\n'),
 (7, 'Dragon Ball Z', 'Goku', 'A strong spirit transcends rules.'),
 (8, 'Dragon Ball Z', 'Vegeta', 'Even a low-class warrior can surpass an elite, with enough hard work.'),
 (9, 'Dragon Ball Z', 'Future Trunks', 'We can’t change the past. All we can do is fight for a better future.'),
@@ -95,40 +93,20 @@ INSERT INTO `anime` (`id`, `title`, `saidBy`, `quote`) VALUES
 (52, 'Dragon Ball Z', 'Vegeta', 'Even if I fall, I’ll rise again.'),
 (53, 'Dragon Ball Z', 'Goku', 'What’s important is never to give up.'),
 (54, 'Attack on Titan', 'Armin Arlert', 'To endure becoming a monster, you must discard your humanity.'),
-(55, 'Your Lie in April', 'Tsubaki Sawabe', 'We’re all afraid. We all get cold feet.'),
+(89, 'DBZ', 'Beerus', 'This compelete in its all its majesty'),
 (56, 'Berserk', 'Skull Knight', 'Struggle, endure, contend. For that alone is the fate of man.'),
 (57, 'Mob Psycho 100', 'Mob', 'It’s okay to be weak sometimes.'),
 (58, 'Vinland Saga', 'Canute', 'If you have love, you don’t need power.'),
 (59, 'Steins;Gate', 'Okabe Rintarou', 'You have no memories because you have no past.'),
 (60, 'Tokyo Ghoul', 'Kaneki Ken', 'Sometimes good people make bad choices.'),
 (61, 'Cowboy Bebop', 'Jet Black', 'Man always thinks about the past before he dies, as if he were frantically searching for proof he was alive.'),
-(62, 'Fullmetal Alchemist: Brotherhood', 'Roy Mustang', 'Nothing’s perfect, the world’s not perfect. But it’s there for us, trying the best it can.'),
-(63, 'Monster', 'Johan Liebert', 'When you gaze into the abyss, the abyss gazes back.'),
+(91, 'Dragon Ball Z', 'Future Trunks', 'I’ve seen hell, and I came back stronger.'),
 (64, 'Attack on Titan', 'Mikasa Ackerman', 'This world is merciless, but it’s also very beautiful.'),
 (65, 'Dragon Ball Z', 'Goku', 'If I don’t stand up now, who will?'),
-(66, 'Dragon Ball Z', 'Vegeta', 'I’ve come too far to turn back now.'),
-(67, 'Dragon Ball Z', 'Gohan', 'The harder you work, the greater your reward.'),
-(68, 'Dragon Ball Z', 'Piccolo', 'Even in darkness, a warrior finds light.'),
-(69, 'Dragon Ball Z', 'Future Trunks', 'Time isn’t always kind, but we can be.'),
+(90, 'DBS', 'Beerus Destroyer', 'This is compelete in its all its majesty'),
+(67, 'Dragon Ball Z Kai', 'Gohan', 'The harder you work, the greater your reward. '),
 (70, 'Dragon Ball Z', 'Vegeta', 'Fate doesn’t decide who we are.'),
-(71, 'Dragon Ball Z', 'Goku', 'Your heart is your greatest power.'),
-(72, 'Dragon Ball Z', 'Gohan', 'You become stronger by choosing kindness.'),
-(73, 'Dragon Ball Z', 'Vegeta', 'What is strength if not used for something greater?'),
-(74, 'Dragon Ball Z', 'Goku', 'Even if you lose everything, never lose your will.'),
-(75, 'Dragon Ball Z', 'Future Trunks', 'What we do now matters more than what’s behind us.'),
-(76, 'Dragon Ball Z', 'Piccolo', 'Every battle teaches us who we are.'),
-(77, 'Dragon Ball Z', 'Goku', 'Pain is the pathway to strength.'),
-(78, 'Dragon Ball Z', 'Vegeta', 'I’m not done yet. I’ll never be done.'),
-(79, 'Dragon Ball Z', 'Gohan', 'Protecting others is the truest strength.'),
-(80, 'Dragon Ball Z', 'Goku', 'I fight to protect, not to destroy.'),
-(81, 'Dragon Ball Z', 'Vegeta', 'I’ll surpass all limits. That’s what it means to be a warrior.'),
-(82, 'Dragon Ball Z', 'Future Trunks', 'Even in despair, I’ll carry hope.'),
-(83, 'Dragon Ball Z', 'Goku', 'Strength is more than power. It’s courage.'),
-(84, 'Dragon Ball Z', 'Gohan', 'No matter what happens, I’ll keep moving forward.'),
-(85, 'Dragon Ball Z', 'Piccolo', 'I’m more than what I was.'),
-(86, 'Dragon Ball Z', 'Goku', 'Believe in your friends, and they’ll believe in you.'),
-(87, 'Dragon Ball Z', 'Vegeta', 'No enemy can defeat pride backed by resolve.'),
-(88, 'Dragon Ball Z', 'Future Trunks', 'I carry my legacy not with sorrow, but with strength.');
+(72, 'Dragon Ball Z', 'Gohan', 'You become stronger by choosing kindness.');
 
 -- --------------------------------------------------------
 
@@ -139,17 +117,20 @@ INSERT INTO `anime` (`id`, `title`, `saidBy`, `quote`) VALUES
 DROP TABLE IF EXISTS `settings`;
 CREATE TABLE IF NOT EXISTS `settings` (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `currentDate` date DEFAULT NULL,
-  `quoteId` int DEFAULT NULL,
+  `currentDate` date NOT NULL DEFAULT (curdate()),
+  `holds` varchar(100) NOT NULL,
+  `title` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `settings`
 --
 
-INSERT INTO `settings` (`id`, `currentDate`, `quoteId`) VALUES
-(1, '2025-05-16', 19);
+INSERT INTO `settings` (`id`, `currentDate`, `holds`, `title`) VALUES
+(1, '2025-06-03', '20', 'quoteId'),
+(2, '2025-06-03', 'D:/wamp64/www/Projects/publicAPI/administrator/assets/images/1544694248683f0677274910.85696195.png', 'siteImage'),
+(3, '2025-06-03', '', 'siteName');
 
 -- --------------------------------------------------------
 
@@ -161,7 +142,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `userName` varchar(100) DEFAULT NULL,
   `passcode` varchar(100) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `users`

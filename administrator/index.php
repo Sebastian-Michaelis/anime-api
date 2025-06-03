@@ -3,7 +3,7 @@
 require_once(__DIR__ . "/credentials.php");
 require_once(__DIR__ . "/../function.php");
 if (!$logedIn)
-    header("location: login.php");
+    header("location: login.html");
 
 $limit = 4;
 $total = ceil(getRecordCount() / $limit);
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
         $options = [
             "http" => [
                 "header" => "Content-Type: application/json\r\n",
-                "method" => "POST",
+                "method" => "PATCH",
                 "content" => json_encode($data)
             ]
         ];
@@ -92,7 +92,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Anime Quote Manager</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link
         href="https://cdn.jsdelivr.net/npm/material-design-iconic-font@2.2.0/dist/css/material-design-iconic-font.min.css"
         rel="stylesheet">
@@ -104,57 +103,66 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
 <body>
     <div class="container">
 
-        <div class="">
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- The WordPress Menu goes here -->
-            <div id="navbarNavDropdown" class="collapse navbar-collapse">
-                <ul id="main-menu" class="navbar-nav">
-                    <li class="nav-item"><a href="#" class="nav-link">Menu Item 1</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Menu Item 2</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Menu Item 3</a></li>
+        <div class="signout-btn">
+            <div class="dropdown text-end">
+                <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="profileDropdown"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://via.placeholder.com/40" alt="profile" width="40" height="40"
+                        class="rounded-circle">
+                </a>
+                <ul class="dropdown-menu text-small" aria-labelledby="profileDropdown">
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <i class="zmdi zmdi-settings me-2"></i> Settings
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <form method="POST">
+                            <button type="submit" name="logout"
+                                class="dropdown-item w-100 text-danger d-flex align-items-center">
+                                <i class="zmdi zmdi-power me-2"></i> Sign Out
+                            </button>
+                        </form>
+                    </li>
                 </ul>
-            </div>
-            <div class="signout-btn">
 
-                <form method="POST">
-                    <button class="btn btn-outline-danger" name="logout">
-                        <i class="zmdi zmdi-power"></i> Sign Out
-                    </button>
-                </form>
+
             </div>
 
-            <?php require "insert-form.php" ?>
 
-            <div class="table-section">
-                <h4 class="mb-3 text-secondary"><i class="zmdi zmdi-format-list-numbered"></i> Submitted Quotes</h4>
-                <table class="table table-bordered table-striped align-middle">
-                    <thead>
-                        <tr>
-                            <th>Serial No</th>
-                            <th>Anime Title</th>
-                            <th>Quote</th>
-                            <th>Said By</th>
-                            <th class="text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-
-                <nav>
-                    <ul class="pagination" data-total="<?= $total ?>">
-                    </ul>
-                </nav>
-            </div>
         </div>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/popper.min.js"></script>
-        <script src="assets/js/main.js"></script>
-        <?php require "update-modal.php" ?>
+
+        <?php require "insert-form.php" ?>
+
+        <div class="table-section">
+            <h4 class="mb-3 text-secondary"><i class="zmdi zmdi-format-list-numbered"></i> Submitted Quotes</h4>
+            <table class="table table-bordered table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>Serial No</th>
+                        <th>Anime Title</th>
+                        <th>Quote</th>
+                        <th>Said By</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+            <nav>
+                <ul class="pagination" data-total="<?= $total ?>">
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <?php require "update-modal.php" ?>
 </body>
 
 </html>

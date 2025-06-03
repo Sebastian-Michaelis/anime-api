@@ -21,20 +21,21 @@ function getQuoteofTheDay()
 {
     global $conn;
 
-    $query = "SELECT * FROM settings WHERE id=1";
+    $query = "SELECT * FROM settings WHERE title='quoteId'";
     $res = mysqli_fetch_assoc(mysqli_query($conn, $query));
     if (date("Y-m-d") == $res['currentDate'])
-        return getRecordById($res['quoteId']);
+        return getRecordById($res['holds']);
 
     return getRecordById(updateQuote());
 }
+
 function updateQuote()
 {
     global $conn;
     $res = getRandomQuote();
     $newDate = date('Y-m-d');
     // echo $newDate;
-    $query = "UPDATE  settings SET currentDate='{$newDate}',quoteId={$res['id']}";
+    $query = "UPDATE  settings SET currentDate='{$newDate}',holds='{$res['id']}' WHERE title='quoteId'";
     mysqli_query($conn, $query);
     return $res['id'];
 }
@@ -106,14 +107,41 @@ function insertRecord($data)
 function updateRecord($data)
 {
     global $conn;
-    $values='';
-    $id=array_shift($data);
-    array_walk($data,function ($value, $key) use(&$values) {
-        $values .= "$key= '$value',"; 
+    $values = '';
+    $id = array_shift($data);
+    array_walk($data, function ($value, $key) use (&$values) {
+        $values .= "$key= '$value',";
     });
-    $values=substr($values,0,-1);
+    $values = substr($values, 0, -1);
     echo "UPDATE anime SET $values WHERE id=$id ";
-    mysqli_query($conn,"UPDATE anime SET $values WHERE id=$id ");
+    mysqli_query($conn, "UPDATE anime SET $values WHERE id=$id ");
+}
+
+function exportSettings()
+{
+    global $conn;
+    $res = mysqli_query($conn, "SELECT * FROM SETTINGS");
+    return mysqli_fetch_all($res, MYSQLI_ASSOC);
+}
+
+function updateSiteImage($image)
+{
+    global $conn;
+    global $siteImage;
+    // print_r($image);
+    if (isset($siteImage))
+        unlink($siteImage);
+
+
+    $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/administrator/assets/images/';  
+
+    $filename = uniqid(mt_rand(), true) . strrchr($image['name'], '.');
+
+    $fullPath = $uploadDir . $filename;
+
+    if (move_uploaded_file($image['tmp_name'], $fullPath)) {
+        mysqli_query($conn, "UPDATE settings SET holds='$fullPath' WHERE title='siteImage'");
+    }
 }
 
 ?>
