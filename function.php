@@ -96,17 +96,24 @@ function deleteRecord($id)
 function insertRecord($data)
 {
     global $conn;
-    $data=implode("','",$data);
-    $res=mysqli_query($conn,"INSERT INTO anime(title,saidBy,quote)  VALUES ('{$data}')");
+    $data = implode("','", $data);
+    $res = mysqli_query($conn, "INSERT INTO anime(title,saidBy,quote)  VALUES ('{$data}')");
     if ($res)
-    return true;
-return false;
+        return true;
+    return false;
 }
 
 function updateRecord($data)
 {
     global $conn;
-    
+    $values='';
+    $id=array_shift($data);
+    array_walk($data,function ($value, $key) use(&$values) {
+        $values .= "$key= '$value',"; 
+    });
+    $values=substr($values,0,-1);
+    echo "UPDATE anime SET $values WHERE id=$id ";
+    mysqli_query($conn,"UPDATE anime SET $values WHERE id=$id ");
 }
 
 ?>
