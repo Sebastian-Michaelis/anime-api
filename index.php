@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . "/function.php");
+require_once(__DIR__ . "/global.php");
 
 $quote = getQuoteofTheDay();
 
@@ -13,7 +13,8 @@ $quote = getQuoteofTheDay();
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Anime Quote</title>
+    <title><?=isset($siteName)?$siteName:'Title'?></title>
+    <link rel="icon" href="<?=$siteImage?>">
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/assets/css/style.css" rel="stylesheet" />
 </head>

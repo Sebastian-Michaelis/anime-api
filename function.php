@@ -133,7 +133,7 @@ function updateSiteImage($image)
         unlink($siteImage);
 
 
-    $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/administrator/assets/images/';  
+    $uploadDir =  'assets/images/';  
 
     $filename = uniqid(mt_rand(), true) . strrchr($image['name'], '.');
 
@@ -141,7 +141,16 @@ function updateSiteImage($image)
 
     if (move_uploaded_file($image['tmp_name'], $fullPath)) {
         mysqli_query($conn, "UPDATE settings SET holds='$fullPath' WHERE title='siteImage'");
+        $siteImage=$fullPath;
     }
+}
+
+function updateSiteName($name)
+{
+    global $conn;
+    global $siteName;
+    mysqli_query($conn, "UPDATE settings SET holds='$name' WHERE title='siteName'");
+    $siteName=$name;
 }
 
 ?>

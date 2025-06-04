@@ -1,9 +1,9 @@
 <?php
 
 require_once(__DIR__ . "/credentials.php");
-require_once(__DIR__ . "/../function.php");
+require_once(__DIR__ . "/../global.php");
 if (!$logedIn)
-    header("location: login.html");
+    header("location: login.php");
 
 $limit = 4;
 $total = ceil(getRecordCount() / $limit);
@@ -91,10 +91,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Anime Quote Manager</title>
-    <link
-        href="https://cdn.jsdelivr.net/npm/material-design-iconic-font@2.2.0/dist/css/material-design-iconic-font.min.css"
-        rel="stylesheet">
+    <title><?=isset($siteName)?$siteName:'Title'?></title>
+    <link rel="icon" href="<?=$siteImage?>">
     <link rel="stylesheet" href="assets/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">

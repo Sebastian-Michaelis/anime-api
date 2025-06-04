@@ -7,6 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $image = isset($_FILES['siteImage']) ? $_FILES['siteImage'] : '';
     if (!empty($_FILES['siteImage']['name']))
         updateSiteImage($image);
+    if (!empty($_POST['siteName']))
+        updateSiteName($_POST['siteName']);
 }
 ?>
 
@@ -17,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Site Settings</title>
+    <link rel="icon" href="<?=$siteImage?>">
     <!-- Bootstrap 5 CSS -->
     <link
         href="https://cdn.jsdelivr.net/npm/material-design-iconic-font@2.2.0/dist/css/material-design-iconic-font.min.css"
@@ -38,8 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <!-- Site Name -->
                     <div class="mb-3">
                         <label for="siteName" class="form-label">Site Name</label>
-                        <input type="text" class="form-control" id="siteName" name="site_name"
-                            placeholder="Enter your site name">
+                        <input type="text" class="form-control" id="siteName" name="siteName"
+                            placeholder="Enter your site name" value="<?= isset($siteName) ? $siteName : '' ?>">
                     </div>
 
                     <!-- Site Image -->

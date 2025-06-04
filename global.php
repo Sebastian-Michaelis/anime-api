@@ -15,9 +15,9 @@ $imageIndex = array_search("siteImage", array_column($settings, "title"));
 $nameIndex = array_search("siteName", array_column($settings, "title"));
 if (!empty($settings[$imageIndex]['holds']))
     $siteImage = $settings[$imageIndex]['holds'];
-if (!empty($settings[$nameIndex]['']))
+if (!empty($settings[$nameIndex]['holds']))
     $siteName = $settings[$nameIndex]['holds'];
 
-echo $siteImage;
+// echo $siteName;
 
 ?>
