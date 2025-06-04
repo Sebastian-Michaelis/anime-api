@@ -129,19 +129,23 @@ function updateSiteImage($image)
     global $conn;
     global $siteImage;
     // print_r($image);
-    if (isset($siteImage))
+    if (isset($siteImage) && file_exists($siteImage))
         unlink($siteImage);
 
-
-    $uploadDir =  'assets/images/';  
-
+    // print_r($image);
+    // die();
+    $uploadDir = realpath(__DIR__ . '/media/images/');
+    // echo $uploadDir;
+    // die();
     $filename = uniqid(mt_rand(), true) . strrchr($image['name'], '.');
-
-    $fullPath = $uploadDir . $filename;
+    $fullPath = $uploadDir . DIRECTORY_SEPARATOR . $filename;
 
     if (move_uploaded_file($image['tmp_name'], $fullPath)) {
-        mysqli_query($conn, "UPDATE settings SET holds='$fullPath' WHERE title='siteImage'");
-        $siteImage=$fullPath;
+        $relativePath = '/media/images/' . $filename;
+        mysqli_query($conn, "UPDATE settings SET holds='$relativePath' WHERE title='siteImage'");
+        $siteImage = $relativePath;
+    } else {
+        die("Failed to upload the file.");
     }
 }
 
@@ -150,7 +154,7 @@ function updateSiteName($name)
     global $conn;
     global $siteName;
     mysqli_query($conn, "UPDATE settings SET holds='$name' WHERE title='siteName'");
-    $siteName=$name;
+    $siteName = $name;
 }
 
 ?>

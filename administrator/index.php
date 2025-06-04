@@ -106,12 +106,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
             <div class="dropdown text-end">
                 <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="profileDropdown"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://via.placeholder.com/40" alt="profile" width="40" height="40"
+                    <img src="<?=$siteImage?>" alt="profile" width="40" height="40"
                         class="rounded-circle">
                 </a>
                 <ul class="dropdown-menu text-small" aria-labelledby="profileDropdown">
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <a class="dropdown-item d-flex align-items-center" href="/administrator/settings.php">
                             <i class="zmdi zmdi-settings me-2"></i> Settings
                         </a>
                     </li>
